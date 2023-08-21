@@ -1,0 +1,41 @@
+import javax.swing.*;
+import java.util.ArrayList;
+
+class AdministradorLibros {
+    private ArrayList<Libro> biblioteca;
+
+    public AdministradorLibros() {
+        biblioteca = new ArrayList<>();
+    }
+    public void agregarLibro(Libro libro) {
+        biblioteca.add(libro);
+    }
+
+    public boolean eliminarLibroPorISBN(String isbn) {
+        Libro libroAEliminar = null;
+        for (Libro libro : biblioteca) {
+            if (libro.getISBN().equals(isbn)) {
+                libroAEliminar = libro;
+                break;
+            }
+        }
+
+        if (libroAEliminar != null) {
+            biblioteca.remove(libroAEliminar);
+            return true; // El libro fue encontrado y eliminado
+        } else {
+            return false; // No se encontró un libro con el ISBN especificado
+        }
+    }
+
+
+    public String mostrarLibros() {
+        StringBuilder librosStr = new StringBuilder("Lista de libros:\n");
+
+        for (Libro libro : biblioteca) {
+            librosStr.append("ISBN: ").append(libro.getISBN()).append(", Título: ").append(libro.getTitulo()).append("\n");
+        }
+
+        return librosStr.toString();
+    }
+}
